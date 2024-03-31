@@ -13,6 +13,8 @@
 BASE="$(cd "$(dirname "$0")" && pwd)"
 CLIENT_FILE="$BASE/api-client"
 
+API_URL="https://api.trakt.tv"
+
 # The list of data buckets to be downloaded.
 read -d ' ' BACKUP_PATHS <<EOF
 watchlist/movies
@@ -89,7 +91,7 @@ mkdir "$OUT_DIR"
 
 # Download all relevant data into files.
 for BACKUP_PATH in $BACKUP_PATHS; do
-  URL="https://api-v2launch.trakt.tv/users/$USERNAME/$BACKUP_PATH"
+  URL="$API_URL/users/$USERNAME/$BACKUP_PATH"
   FILE=$(echo $BACKUP_PATH | sed -e 's|/|_|g')
   curl --silent\
     --header "Authorization: Bearer $AUTH_TOKEN" \
