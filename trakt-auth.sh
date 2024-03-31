@@ -14,6 +14,8 @@
 BASE="$(cd "$(dirname "$0")" && pwd)"
 CLIENT_FILE="$BASE/api-client"
 
+API_URL="https://api.trakt.tv"
+
 # Parse all command line options.
 while [[ $# > 1 ]]; do
   case "$1" in
@@ -89,7 +91,7 @@ fi
 CONTENT_TYPE="Content-Type: application/json"
 
 # Post the authentication request.
-URL="https://api-v2launch.trakt.tv/oauth/token"
+URL="$API_URL/oauth/token"
 RESPONSE=$(curl --silent --header "$CONTENT_TYPE" --data @- "$URL" <<EOF
 {
   "$GRANT_FIELD": "$GRANT_DATA",
